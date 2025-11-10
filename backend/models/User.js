@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/db.js";
 
+//This is how we define the model for the User table
 export const User = sequelize.define('User', {
     name: {
         type: DataTypes.STRING(100),
@@ -27,3 +28,4 @@ export const User = sequelize.define('User', {
         defaultValue: true,
     }, 
 }, { timestamps: true });
+//Timestamps - automatically adds 'createdAt' and 'updatedAt' columns for each user
