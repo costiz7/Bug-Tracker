@@ -2,24 +2,30 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../database/db.js";
 
 //This is how we define the model for the User table
-export const User = sequelize.define('User', {
-    name: {
-        type: DataTypes.STRING(100),
+const User = sequelize.define('User', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    username: {
+        type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     email: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
             isEmail: true,
         },
     },
-    password_hash: {
-        type: DataTypes.STRING(255),
+    password: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    avatar_url: {
+    avatar: {
         type: DataTypes.STRING,
         allowNull: true,
     },
@@ -27,5 +33,9 @@ export const User = sequelize.define('User', {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     }, 
-}, { timestamps: true });
+}, { 
+    timestamps: true, 
+});
 //Timestamps - automatically adds 'createdAt' and 'updatedAt' columns for each user
+
+export default User;

@@ -1,7 +1,10 @@
 import express from 'express';
 import 'dotenv/config';
 import { connectDB, sequelize } from './database/db.js';
-import { User } from './models/User.js'; //We import these so they can be created when we sync
+import User from './models/User.js'; //We import these so they can be created when we sync
+import Project from './models/Project.js';
+import ProjectMember from './models/ProjectMember.js';
+import './models/associations.js';
 
 const app = express();
 const PORT = process.env.PORT;
