@@ -1,13 +1,10 @@
 import express from 'express';
 import 'dotenv/config';
 import { connectDB, sequelize } from './database/db.js';
-import User from './models/User.js'; //We import these so they can be created when we sync
-import Project from './models/Project.js';
-import ProjectMember from './models/ProjectMember.js';
-import './models/associations.js';
+import './models/associations.js'
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -17,7 +14,7 @@ app.get('/', (req, res) => {
 const start = async () => {
     await connectDB(); //We connect the database with our server
 
-    await sequelize.sync({ alter: true }); //It alters the existing tables in our database so they can match with our models
+    await sequelize.sync({ force: true }); //It alters the existing tables in our database so they can match with our models
     console.log('All models synced.');
 
     app.listen(PORT, () => console.log('Server running on port 3000'));

@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import 'dotenv/config'; //Using .env variables
 
 //Here, I delclared a Sequelize instance using its constructor
-export const sequelize = new Sequelize(
+const sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASS,
@@ -14,7 +14,7 @@ export const sequelize = new Sequelize(
 );
 
 //Testing the connection (will keep it on by default)
-export const connectDB = async () => {
+const connectDB = async () => {
     try {
         await sequelize.authenticate(); //Here we test
         console.log('Connected to MySQL successfully.');
@@ -22,3 +22,5 @@ export const connectDB = async () => {
         console.log('Unable to connect to the database: ', error);
     }
 };
+
+export { sequelize, connectDB };
