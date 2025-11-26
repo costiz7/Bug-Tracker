@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 const start = async () => {
     await connectDB(); //We connect the database with our server
 
-    await sequelize.sync({ force: true }); //It alters the existing tables in our database so they can match with our models
+    await sequelize.sync({ alter: true }); //It alters the existing tables in our database so they can match with our models
     console.log('All models synced.');
 
     app.listen(PORT, () => console.log('Server running on port 3000'));
