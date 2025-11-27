@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import 'dotenv/config'; //Using .env variables
 
 //Here, I delclared a Sequelize instance using its constructor
 const sequelize = new Sequelize(
