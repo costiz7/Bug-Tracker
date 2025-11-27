@@ -2,10 +2,13 @@ import express from 'express';
 import 'dotenv/config';
 import { connectDB, sequelize } from './database/db.js';
 import './models/associations.js'
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
     res.send('Bug Tracker API running... ');
