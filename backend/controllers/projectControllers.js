@@ -16,7 +16,7 @@ export const createProject = async (req, res) => {
         await ProjectMember.create({
             project_id: newProject.id,
             user_id: userId,
-            role: ADMIN
+            role: 'ADMIN'
         });
 
         res.status(201).json({
