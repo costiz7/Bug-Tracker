@@ -57,6 +57,7 @@ export const login = async (req, res) => {
             { expiresIn: '1d' }
         );
 
+        //Send the token to our frontend
         res.status(200).json({
             token,
             user: { id: user.id, username: user.username, email: user.email }
