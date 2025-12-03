@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import 'dotenv/config';
 import { connectDB, sequelize } from './database/db.js';
 import './models/associations.js'
