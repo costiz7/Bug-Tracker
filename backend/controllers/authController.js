@@ -2,8 +2,10 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+//Controller for when someone tries to register
 export const register = async (req, res) => {
     try {
+        //Take user's credentials from the received request
         const { username, email, password} = req.body;
 
         //We verify if we already have this email in our User table
@@ -12,6 +14,7 @@ export const register = async (req, res) => {
             return res.status(400).json({ message: 'This email already exists.' });
         }
 
+        //We verify if we already have this username in our User table
         const existingUsername = await User.findOne({ where: {username}});
         if(existingUsername) {
             return res.status(400).json({ message: 'This username is already taken.' });
@@ -28,14 +31,17 @@ export const register = async (req, res) => {
             password: hashedPassword
         });
 
+        //Send our response, with a success message and the id of the user created
         res.status(201).json({ message: 'User created successfully', userId: newUser.id });
     } catch(error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
 
+//Controller for when someone tries to login in our app
 export const login = async (req, res) => {
     try {
+        //Take their email and password from their request
         const { email, password } = req.body;
 
         //We look for our user
@@ -50,7 +56,7 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials.' });
         }
 
-        //Generate a token (JWT)
+        //Generate a token (JWT) so we can save it later in our User's PC so we know who does the requests
         const token = jwt.sign(
             { id: user.id, username: user.username },
             process.env.JWT_SECRET || 'temporary_secret',
